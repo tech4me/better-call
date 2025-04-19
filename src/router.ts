@@ -123,8 +123,11 @@ export const createRouter = <E extends Record<string, Endpoint>, Config extends 
 
 	const processRequest = async (request: Request) => {
 		const url = new URL(request.url);
+		console.log("URL: ", url);
+		console.log("config?.basePath: ", config?.basePath);
+		console.log("URL pathname: ", url.pathname)
 		const path = config?.basePath ? url.pathname.split(config.basePath)[1] : url.pathname;
-
+		console.log("PATH: ", path);
 		if (!path?.length) {
 			config?.onError?.(new Error("NOT_FOUND"));
 			return new Response(null, { status: 404, statusText: "Not Found" });
